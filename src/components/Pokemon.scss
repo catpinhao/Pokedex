@@ -1,19 +1,19 @@
 .pokemon {
   &_card {
     background: #ddf;
+    border: 1px dashed black;
     border-radius: 50px;
     cursor: pointer;
-    display: flex;
     font-family: 'Montserrat', sans-serif;
     height: 200px;
-    justify-content: space-between;
-    margin-right: 25px;
-    margin-bottom: 25px;
+    margin: 0 15px;
+    margin-bottom: 30px;
     padding: 20px;
     transition: transform .5s;
     width: 350px;
 
     &:hover {
+      border: none;
       box-shadow: 0 0 15px 0px black;
       transform: scale(1.15);
       z-index: 1;
@@ -22,7 +22,7 @@
 
   &_name {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 0;
     text-transform: capitalize;
   }
@@ -47,4 +47,12 @@
     height: 150px;
     width: 150px;
   }
+}
+
+.left_wrapper {
+  float: left;
+}
+
+.right_wrapper {
+  float: right;
 }

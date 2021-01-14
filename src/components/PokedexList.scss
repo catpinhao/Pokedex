@@ -12,13 +12,16 @@
   }
 
   &_button {
-    background: lightgray;
+    background: #ddd;
     align-self: center;
-    border: none;
+    border: 1px dashed black;
     border-radius: 10px;
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
     padding: 15px 0px;
     outline: none;
+    text-transform: uppercase;
     width: 125px;
   }
 }
