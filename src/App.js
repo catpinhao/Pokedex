@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import PokedexList from './PokedexList';
 
 export default class App extends React.Component {
@@ -10,9 +10,7 @@ export default class App extends React.Component {
           <h1>Pokédex</h1>
         </header>
 
-        <section className="pokedex_wrapper">
-          <PokedexList />
-        </section>
+        <PokedexList />
       </div>
     );
   }

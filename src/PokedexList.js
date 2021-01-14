@@ -1,5 +1,5 @@
 import React from 'react';
-import './PokedexList.css';
+import './PokedexList.scss';
 import Pokemon from './Pokemon';
 
 export default class PokedexList extends React.Component {
@@ -15,10 +15,11 @@ export default class PokedexList extends React.Component {
   }
 
   handleRequest() {
+    // TODO: replace button with a spinning placeholder
     const { offset, pokedex } = this.state;
     const self = this;
 
-    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}`)
+    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`)
       .then(res => res.json())
       .then((res) =>
         self.setState({
@@ -39,11 +40,12 @@ export default class PokedexList extends React.Component {
     ));
 
     return (
-      <div className="pokedex_list">
-        {pokemon}
-
+      <section className="pokedex_wrapper">
+        <div className="pokedex_list">
+          {pokemon}
+        </div>
         <button className="pokedex_button" onClick={this.handleRequest}>More</button>
-      </div>
+      </section>
     );
   }
 }
