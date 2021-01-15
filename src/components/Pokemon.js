@@ -9,53 +9,41 @@ export default class Pokemon extends React.Component {
       pokemon: [],
       image: '',
       generation: '',
-      pokemonId: 0,
     };
 
     this.handleRequest = this.handleRequest.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleRequest(pokemonId) {
+  async handleRequest(pokemonId) {
     const { name } = this.props.content;
-    const self = this;
-    let newState = {
-      pokemon: [],
-      image: '',
-      generation: '',
-      pokemonId,
-    }
 
-    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      .then(res => res.json())
-      .then(res => {
-        newState.pokemon = res;
-        newState.image = res.sprites.other["dream_world"].front_default;
-      }).then(
-        fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
-          .then(newRes => newRes.json())
-          .then(newRes => {
-            newState.generation = newRes.generation.name;
-            self.setState(newState);
-          })
-      );
+    const firstRequest = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    const firstResponse = await firstRequest.json();
+    const secondRequest = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+    const secondResponse = await secondRequest.json();
+
+    this.setState({
+      pokemon: firstResponse,
+      image: firstResponse.sprites.other["dream_world"].front_default,
+      generation: secondResponse.generation.name,
+    });
   }
 
   handleClick() {
-    const { pokemonId } = this.state;
-    console.log(`clicked on #${pokemonId}`);
+    const { pokemonId } = this.props;
+    const { pokemon } = this.state;
+    this.props.handleModal(pokemonId, pokemon);
   }
 
   componentDidMount() {
-    let pokemonId = this.props.content.url;
-    pokemonId = pokemonId.split('/').filter(Number)[0]
-
+    const { pokemonId } = this.props;
     this.handleRequest(pokemonId);
   }
 
   render() {
-    const { content } = this.props;
-    const { image, generation, pokemonId } = this.state;
+    const { content, pokemonId } = this.props;
+    const { image, generation } = this.state;
     const genNumber = generation.split('-').pop().toUpperCase();
 
     return (

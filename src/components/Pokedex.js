@@ -7,7 +7,7 @@ export default class Pokedex extends React.Component {
     return (
       <div className="pokedex">
         <header className="pokedex_header">
-          <h1>Pokédex</h1>
+          <h1>Catarina's Pokédex</h1>
         </header>
 
         <PokedexList />
